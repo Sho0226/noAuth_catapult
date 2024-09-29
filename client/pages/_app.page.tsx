@@ -3,7 +3,6 @@ import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import { I18n } from 'aws-amplify/utils';
 import { APP_NAME } from 'common/constants';
-import { AuthLoader } from 'features/auth/AuthLoader';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -54,7 +53,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <SafeHydrate>
         <Authenticator.Provider>
-          <AuthLoader />
           <Component {...pageProps} />
         </Authenticator.Provider>
       </SafeHydrate>

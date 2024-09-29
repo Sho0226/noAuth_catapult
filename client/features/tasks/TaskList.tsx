@@ -1,7 +1,6 @@
 import useAspidaSWR from '@aspida/swr';
 import type { TaskDto } from 'common/types/task';
 import { labelValidator } from 'common/validators/task';
-import { Loading } from 'components/loading/Loading';
 import { useAlert } from 'hooks/useAlert';
 import type { FormEvent } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -59,8 +58,6 @@ export const TaskList = () => {
     return () => URL.revokeObjectURL(previewImageUrl);
   }, [previewImageUrl]);
 
-  if (!tasks) return <Loading visible />;
-
   return (
     <div className={styles.main}>
       <div className={styles.card}>
@@ -84,23 +81,6 @@ export const TaskList = () => {
           </div>
         </form>
       </div>
-      {tasks.map((task) => (
-        <div key={task.id} className={styles.card}>
-          {task.image && <img src={task.image.url} alt={task.label} className={styles.taskImage} />}
-          <div className={styles.form}>
-            <div className={styles.controls}>
-              <input type="checkbox" checked={task.done} onChange={() => toggleDone(task)} />
-              <span>{task.label}</span>
-              <input
-                type="button"
-                value="DELETE"
-                className={styles.btn}
-                onClick={() => deleteTask(task)}
-              />
-            </div>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };

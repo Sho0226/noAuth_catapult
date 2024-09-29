@@ -1,9 +1,7 @@
 import { AccountSettings } from '@aws-amplify/ui-react';
 import { signOut } from 'aws-amplify/auth';
 import { APP_NAME } from 'common/constants';
-import type { UserDto } from 'common/types/user';
 import { Spacer } from 'components/Spacer';
-import { HumanIcon } from 'components/icons/HumanIcon';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'components/modal/Modal';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
@@ -39,7 +37,7 @@ const MenuItem = (props: { onClick: () => void; children: ReactNode }) => {
   );
 };
 
-export const BasicHeader = (props: { user: UserDto }) => {
+export const BasicHeader = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [openPassword, setOpenPassword] = useState(false);
@@ -54,15 +52,7 @@ export const BasicHeader = (props: { user: UserDto }) => {
         </Link>
         <div className={styles.btnContainer}>
           <div className={styles.userBtn} onClick={(e) => setAnchorEl(e.currentTarget)}>
-            {props.user.photoUrl ? (
-              <div
-                className={styles.photo}
-                style={{ backgroundImage: `url(${props.user.photoUrl})` }}
-              />
-            ) : (
-              <HumanIcon size={18} fill="#336" />
-            )}
-            {props.user.displayName}
+            <div className={styles.photo} />
           </div>
           <Menu open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
             <MenuItem onClick={() => setOpenProfile(true)}>Your profile</MenuItem>
@@ -73,13 +63,7 @@ export const BasicHeader = (props: { user: UserDto }) => {
       </div>
       <Modal open={openProfile} onClose={() => setOpenProfile(false)}>
         <ModalHeader text="Your profile" />
-        <ModalBody>
-          <div>Sign in name: {props.user.signInName}</div>
-          <Spacer axis="y" size={8} />
-          <div>Display name: {props.user.displayName}</div>
-          <Spacer axis="y" size={8} />
-          <div>Email: {props.user.email}</div>
-        </ModalBody>
+
         <ModalFooter cancelText="Close" cancel={() => setOpenProfile(false)} />
       </Modal>
       <Modal open={openPassword} onClose={() => setOpenPassword(false)}>
