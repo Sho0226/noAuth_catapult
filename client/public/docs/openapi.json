@@ -9,6 +9,134 @@
       "url": "/api"
     }
   ],
-  "paths": {},
-  "components": {}
+  "paths": {
+    "/health": {
+      "get": {
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record<\"server\"|\"db\"|\"s3\"|\"cognito\",\"ok\">"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/session": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idToken": {
+                    "type": "string"
+                  },
+                  "accessToken": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "accessToken",
+                  "idToken"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "const": "success"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "const": "success"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Record<\"server\"|\"db\"|\"s3\"|\"cognito\",\"ok\">": {
+        "type": "object",
+        "properties": {
+          "server": {
+            "type": "string",
+            "const": "ok"
+          },
+          "db": {
+            "type": "string",
+            "const": "ok"
+          },
+          "s3": {
+            "type": "string",
+            "const": "ok"
+          },
+          "cognito": {
+            "type": "string",
+            "const": "ok"
+          }
+        },
+        "required": [
+          "cognito",
+          "db",
+          "s3",
+          "server"
+        ]
+      }
+    }
+  }
 }
