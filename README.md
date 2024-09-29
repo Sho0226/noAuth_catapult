@@ -1,11 +1,8 @@
-# C A T A P U L T
-
 aspida と frourio を用いた TypeScript フルスタックテンプレート
 
 - Frontend: Next.js
 - Backend: Fastify
 - ORM: Prisma + PostgreSQL
-- Auth: AWS Cognito
 - Object Storage: AWS S3 or Cloudflare R2
 - 関数型ドメイン駆動設計
 - 全ての関数に依存性注入が可能
