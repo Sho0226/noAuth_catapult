@@ -4,7 +4,6 @@ import { Amplify } from 'aws-amplify';
 import { I18n } from 'aws-amplify/utils';
 import { APP_NAME } from 'common/constants';
 import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import 'styles/globals.css';
@@ -17,8 +16,6 @@ import {
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const SafeHydrate = dynamic(() => import('../components/SafeHydrate'), { ssr: false });
-
   useEffect(() => {
     Amplify.configure({
       Auth: {
@@ -51,11 +48,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>{APP_NAME}</title>
       </Head>
-      <SafeHydrate>
-        <Authenticator.Provider>
-          <Component {...pageProps} />
-        </Authenticator.Provider>
-      </SafeHydrate>
+
+      <Authenticator.Provider>
+        <Component {...pageProps} />
+      </Authenticator.Provider>
     </>
   );
 }
