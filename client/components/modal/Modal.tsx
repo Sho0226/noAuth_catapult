@@ -1,5 +1,4 @@
 import { Portal } from 'components/Portal';
-import { Spacer } from 'components/Spacer';
 import { Btn } from 'components/btn/Btn';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
@@ -31,13 +30,11 @@ export const ModalFooter = (
         props.disabledText !== undefined && (
           <>
             <div className={styles.warning}>{props.disabledText}</div>
-            <Spacer axis="y" size={12} />
           </>
         )}
       {props.headerText !== undefined && (
         <>
           <div className={styles.footerText}>{props.headerText}</div>
-          <Spacer axis="y" size={12} />
         </>
       )}
       {props.cancel && (
@@ -45,7 +42,6 @@ export const ModalFooter = (
       )}
       {props.okText !== undefined && (
         <>
-          <Spacer axis="x" size={16} />
           <Btn size="small" text={props.okText} disabled={props.disabledOk} onClick={props.ok} />
         </>
       )}
