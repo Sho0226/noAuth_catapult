@@ -45,7 +45,6 @@ const Login = () => {
           <Spacer axis="y" size={60} />
         </div>
       ) : (
-        <Loading visible />
       )}
       <div className={styles.credit}>
         <a
